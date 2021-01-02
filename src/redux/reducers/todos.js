@@ -1,7 +1,7 @@
 import { handleActions } from 'redux-actions';
 import { v4 as uuidv4 } from 'uuid';
 import { saveTodos } from '../../api';
-import { addTodo } from '../actions';
+import { addTodo, completeTodo } from '../actions';
 
 const initialState = [];
 let newState;
@@ -9,20 +9,29 @@ let newState;
 export const reducer = handleActions(
     {
         [addTodo]: (
-            todos,
-            { payload: {
-                text
-            }}
+            todos, { payload: text }
         ) => {
-            console.log("add fired from ra reducer");
-            console.log({text});
             newState = [...todos, 
                 {isComplete: false,
                 key: uuidv4(),
                 text: text
                 }];
-            console.log({newState});
+            saveTodos(newState);
             return newState;
+        },
+        [completeTodo]: (
+            todos, action
+        ) => {
+            newState = todos.map(todo => {
+               if (todo.key === action.payload.key) {
+                    action.payload.isComplete = !action.payload.isComplete
+                    return action.payload   
+               } else {
+                   return todo
+               }
+            });
+            saveTodos(newState);
+            return newState
         }
     }, 
     initialState
