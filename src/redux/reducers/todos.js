@@ -1,7 +1,8 @@
-import { handleActions } from 'redux-actions';
-import { v4 as uuidv4 } from 'uuid';
 import { saveTodos } from '../../api';
 import { addTodo, completeTodo, editTodo, removeTodo, useDownloadTodos } from '../actions';
+
+import { v4 as uuidv4 } from 'uuid';
+import { handleActions } from 'redux-actions';
 
 const initialState = [];
 let newState;

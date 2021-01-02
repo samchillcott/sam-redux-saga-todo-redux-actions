@@ -70,7 +70,6 @@ function App(props) {
 	);
 }
 
-
 const mapStateToProps = ({ todos }) => ({
 	todos 
 });
