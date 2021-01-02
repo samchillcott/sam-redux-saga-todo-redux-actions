@@ -1,14 +1,15 @@
+import { createAction } from 'redux-actions';
 
-
+export const addTodo = createAction('ADD_TODO');
 
 //Action Creator
-export const addTodo = (todoText) => {
-    // return an action
-    return {
-        type: 'ADD_TODO',
-        payload: todoText
-    }
-}
+// export const addTodo = (todoText) => {
+//     // return an action
+//     return {
+//         type: 'ADD_TODO',
+//         payload: todoText
+//     }
+// }
 
 export const completeTodo = (todo) => {
     return {
