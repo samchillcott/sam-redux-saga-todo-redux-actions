@@ -1,7 +1,7 @@
 import { handleActions } from 'redux-actions';
 import { v4 as uuidv4 } from 'uuid';
 import { saveTodos } from '../../api';
-import { addTodo, completeTodo } from '../actions';
+import { addTodo, completeTodo, removeTodo } from '../actions';
 
 const initialState = [];
 let newState;
@@ -30,6 +30,13 @@ export const reducer = handleActions(
                    return todo
                }
             });
+            saveTodos(newState);
+            return newState
+        },
+        [removeTodo]: (
+            todos, action
+        ) => {
+            newState = todos.filter(todo => todo.key !== action.payload.key)
             saveTodos(newState);
             return newState
         }
