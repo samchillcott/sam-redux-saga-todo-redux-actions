@@ -1,6 +1,6 @@
 import { React } from "react";
-import { connect } from 'react-redux';
-
+import { compose } from 'redux';
+import withTodoActions from "./HOCS/WithActions/todo";
 
 function Todo({ todo, completeTodo, removeTodo, editTodo }) {
 	const changeHandler = (e) => {
@@ -18,13 +18,9 @@ function Todo({ todo, completeTodo, removeTodo, editTodo }) {
 			<button onClick={() => completeTodo(todo)}>
 				{todo.isComplete === false ? "Complete" : "Restore"}
 			</button>
-			<button onClick={() => removeTodo(todo)}>X</button>
+			<button onClick={() => removeTodo(todo.key)}>X</button>
 		</div>
 	);
 }
 
-const mapStateToProps = ({ todos }) => ({
-	todos 
-});
-
-export default connect(mapStateToProps)(Todo);
+export default compose(withTodoActions)(Todo);

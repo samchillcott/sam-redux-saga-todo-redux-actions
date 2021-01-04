@@ -1,5 +1,4 @@
-import { saveTodos } from '../../api';
-import { addTodo, completeTodo, editTodo, removeTodo, useDownloadTodos, loadTodos } from '../actions/todo';
+import { addTodo, completeTodo, editTodo, removeTodo, loadTodos } from '../actions/todo';
 
 import { v4 as uuidv4 } from 'uuid';
 import { handleActions } from 'redux-actions';
@@ -17,7 +16,6 @@ export const reducer = handleActions({
             key: uuidv4(),
             text: text
             }];
-        saveTodos(newState);
         return newState;
     },
     [completeTodo]: (
@@ -31,14 +29,12 @@ export const reducer = handleActions({
                 return todo
             }
         });
-        saveTodos(newState);
         return newState
     },
     [removeTodo]: (
         todos, action
     ) => {
         newState = todos.filter(todo => todo.key !== action.payload.key)
-        saveTodos(newState);
         return newState
     },
     [editTodo]: (
@@ -51,11 +47,10 @@ export const reducer = handleActions({
                 return todo
             }
         });
-        saveTodos(newState);
         return newState
         },
     [loadTodos]: (
-        todos, action
+        _, action
     ) => {
         return action.payload
     }

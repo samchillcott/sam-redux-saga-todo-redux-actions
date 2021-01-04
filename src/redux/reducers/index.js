@@ -1,4 +1,4 @@
-import { reducer } from './todos'
+import { reducer } from './todo'
 import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
