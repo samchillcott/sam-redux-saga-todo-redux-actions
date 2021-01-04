@@ -1,7 +1,7 @@
 import {call, put, takeLatest} from 'redux-saga/effects';
 import { fetchTodos } from '../../api';
 
-function* handleDownloadTodos(dispatch) {
+function* handleGetTodos(dispatch) {
     console.log(dispatch);
     try {
         console.log("handleDownloadTodos worker saga fired");
@@ -18,5 +18,5 @@ function* handleDownloadTodos(dispatch) {
 }
 
 export function* todosSagas(){
-    yield takeLatest('DOWNLOAD_TODOS', handleDownloadTodos)
+    yield takeLatest('GET_TODOS', handleGetTodos)
 }

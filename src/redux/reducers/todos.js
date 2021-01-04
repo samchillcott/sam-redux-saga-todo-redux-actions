@@ -1,5 +1,5 @@
 import { saveTodos } from '../../api';
-import { addTodo, completeTodo, editTodo, removeTodo, useDownloadTodos, loadTodos } from '../actions';
+import { addTodo, completeTodo, editTodo, removeTodo, useDownloadTodos, loadTodos } from '../actions/todo';
 
 import { v4 as uuidv4 } from 'uuid';
 import { handleActions } from 'redux-actions';
