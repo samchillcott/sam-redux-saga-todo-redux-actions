@@ -1,9 +1,10 @@
 import { saveTodos } from '../../api';
-import { addTodo, completeTodo, editTodo, removeTodo, useDownloadTodos } from '../actions';
+import { addTodo, completeTodo, editTodo, removeTodo, useDownloadTodos, loadTodos } from '../actions';
 
 import { v4 as uuidv4 } from 'uuid';
 import { handleActions } from 'redux-actions';
 
+// const initialState = [{name: "initialState from top of reducer", isComplete: false}];
 const initialState = [];
 let newState;
 
@@ -53,9 +54,12 @@ export const reducer = handleActions({
         saveTodos(newState);
         return newState
         },
-    [useDownloadTodos]: (
-        action
+    [loadTodos]: (
+        todos, action
     ) => {
+        console.log("useDownloadTodos fired in reducer");
+        console.log({action});
+        console.log({todos});
         return action.payload
     }
 }, initialState);

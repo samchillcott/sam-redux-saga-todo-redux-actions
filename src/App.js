@@ -3,17 +3,18 @@ import Todo from "./Todo";
 import React, { useState, useEffect } from "react";
 
 import { connect, useDispatch } from 'react-redux';
-import { addTodo, completeTodo, removeTodo, editTodo } from "./redux/actions";
+import { addTodo, completeTodo, removeTodo, editTodo, downloadTodos } from "./redux/actions";
 
-function App(props) {
-	const { todos, addTodo, completeTodo, removeTodo, editTodo } = props;
+function App({ todos, addTodo, completeTodo, removeTodo, editTodo, downloadTodos }) {
 	const [value, setValue] = useState("");
-	const dispatch = useDispatch();
+	// const dispatch = useDispatch();
 
 	// Pulls saved data from Firebase on initialization
 	useEffect(() => {
-		dispatch({type: 'DOWNLOAD_TODOS'});
-	}, []);
+		// dispatch({type: 'DOWNLOAD_TODOS'});
+		downloadTodos()
+		console.log("UIE foired");
+	}, [downloadTodos]);
 
 	// Grabs text value from form and call addTodo function
 	const submitHandler = (e) => {
@@ -79,6 +80,7 @@ const mapDispatchToProps = (dispatch) => ({
 	completeTodo: (payload) => dispatch(completeTodo(payload)),
 	removeTodo: (payload) => dispatch(removeTodo(payload)),
 	editTodo: (payload) => dispatch(editTodo(payload)),
+	downloadTodos: () => dispatch(downloadTodos())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
