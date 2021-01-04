@@ -1,5 +1,3 @@
-import { connect } from 'react-redux';
-
 import {
     getTodos,
     addTodo,
@@ -8,9 +6,11 @@ import {
     editTodo
 } from '../../redux/actions/todo';
 
+import { connect } from 'react-redux';
+
 const withTodoActions = (WrappedComponent) => connect(
   null, {
-   getTodos,
+    getTodos,
     addTodo,
     removeTodo,
     completeTodo,

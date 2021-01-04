@@ -57,9 +57,6 @@ export const reducer = handleActions({
     [loadTodos]: (
         todos, action
     ) => {
-        console.log("useDownloadTodos fired in reducer");
-        console.log({action});
-        console.log({todos});
         return action.payload
     }
 }, initialState);
