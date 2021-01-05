@@ -1,6 +1,6 @@
 import { todos } from '../../selectors';
 import todosAPI from '../../API/Endpoints/todo';
-import { addTodo, completeTodo, getTodos, loadTodos, removeTodo } from '../actions/todo';
+import { addTodo, completeTodo, editTodo, getTodos, loadTodos, removeTodo } from '../actions/todo';
 
 import { v4 as uuidv4 } from 'uuid';
 import {call, put, select, takeLatest} from 'redux-saga/effects';
@@ -61,9 +61,27 @@ function* handleRemoveTodo({payload: key}) {
     }
 }
 
+function* handleEditTodo(action){
+    const allTodos = yield select(todos);
+    const updatedTodos = allTodos.map(todo => {
+        if (todo.key === action.payload.key) {
+            return action.payload
+        } else {
+            return todo
+        }
+    });
+    const response = yield call(todosAPI.saveTodos, updatedTodos);   
+    if (response.status === 200) {
+        yield put(loadTodos(response.data))
+    } else {
+        alert(response.statusText);
+    }
+}
+
 export function* todosSagas(){
     yield takeLatest(getTodos, handleGetTodos);
     yield takeLatest(addTodo, handleAddTodo);
     yield takeLatest(completeTodo, handleCompleteTodo);
     yield takeLatest(removeTodo, handleRemoveTodo);
+    yield takeLatest(editTodo, handleEditTodo);
 }
